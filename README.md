@@ -23,9 +23,9 @@ Add the following file to `/config`, and name it `btce_api.yml`:
     key: 'your_api_key'
     secret: 'your_api_secret'
 
-Or add the following file to `/initializers`, and name it `btce_api.rb`:
+Or add the following file to `/config/initializers`, and name it `btce_api.rb`:
 
-    # /{Rails.root}/initializers/btce_api.rb
+    # /{Rails.root}/config/initializers/btce_api.rb
 
     RubyBtce.configure do |config|
       config.key = ENV['BTCE_API_KEY']
