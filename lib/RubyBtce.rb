@@ -71,10 +71,10 @@ module RubyBtce
     return @nonce = result
   end
 
-  def self.parse_request(request)
-    return request['error'] unless request['success'] == 1
+  def self.parse_response(response)
+    return response['error'] unless response['success'] == 1
 
-    Hashie::Mash.new(request['return']) if request['success'] == 1
+    Hashie::Mash.new(response['return']) if response['success'] == 1
   end
 
   def self.all_currencies
@@ -82,38 +82,38 @@ module RubyBtce
   end
 
   def self.account
-    request = RubyBtce.api('getInfo', {})
-    parse_request(request)
+    response = RubyBtce.api('getInfo', {})
+    parse_response(response)
   end
 
   def self.new_trade(opts = {})
-    request = RubyBtce.api('Trade', opts)
-    parse_request(request)
+    response = RubyBtce.api('Trade', opts)
+    parse_response(response)
   end
 
   def self.cancel(opts = {})
-    request = RubyBtce.api('CancelOrder', opts)
-    parse_request(request)
+    response = RubyBtce.api('CancelOrder', opts)
+    parse_response(response)
   end
 
   def self.orders(opts = {})
-    request = RubyBtce.api('ActiveOrders', opts)
-    parse_request(request)
+    response = RubyBtce.api('ActiveOrders', opts)
+    parse_response(response)
   end
 
   def self.transactions(opts = {})
-    request = RubyBtce.api('TransHistory', opts)
-    parse_request(request)
+    response = RubyBtce.api('TransHistory', opts)
+    parse_response(response)
   end
 
   def self.trades(opts = {})
-    request = RubyBtce.api('TradeHistory', opts)
-    parse_request(request)
+    response = RubyBtce.api('TradeHistory', opts)
+    parse_response(response)
   end
 
   def self.ticker
-    request = JSON.parse(open("https://btc-e.com/api/3/ticker/#{all_currencies}").read)
-    parse_request(request)
+    response = JSON.parse(open("https://btc-e.com/api/3/ticker/#{all_currencies}").read)
+    parse_response(response)
   end
 
   def self.pair_info
