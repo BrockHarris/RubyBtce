@@ -1,0 +1,4 @@
+RubyBtce.configure do |config|
+  config.key = ENV['BTCE_API_KEY']
+  config.secret = ENV['BTCE_API_SECRET']
+end
