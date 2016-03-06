@@ -78,7 +78,7 @@ module RubyBtce
   end
 
   def self.all_currencies
-    @pairs.map(&:to_s).join('-')
+    @configuration.pairs.map(&:to_s).join('-')
   end
 
   def self.account
@@ -113,7 +113,7 @@ module RubyBtce
 
   def self.ticker
     response = JSON.parse(open("https://btc-e.com/api/3/ticker/#{all_currencies}").read)
-    parse_response(response)
+    Hashie::Mash.new(response)
   end
 
   def self.pair_info
