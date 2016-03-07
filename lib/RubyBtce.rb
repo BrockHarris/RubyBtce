@@ -111,6 +111,11 @@ module RubyBtce
     parse_response(response)
   end
 
+  def self.order_info(opts = {})
+    response = RubyBtce.api('OrderInfo', opts)
+    parse_response(response)
+  end
+
   def self.ticker
     response = JSON.parse(open("https://btc-e.com/api/3/ticker/#{all_currencies}").read)
     Hashie::Mash.new(response)
