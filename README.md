@@ -18,10 +18,19 @@ Or install it yourself as:
 
 Add the following file to `/config`, and name it `btce_api.yml`:
 
-    # /{Rails.root}/config/btce_api.yml 
+    # /{Rails.root}/config/btce_api.yml
 
     key: 'your_api_key'
     secret: 'your_api_secret'
+
+Or add the following file to `/config/initializers`, and name it `btce_api.rb`:
+
+    # /{Rails.root}/config/initializers/btce_api.rb
+
+    RubyBtce.configure do |config|
+      config.key = ENV['BTCE_API_KEY']
+      config.secret = ENV['BTCE_API_SECRET']
+    end
 
 ## Usage
 
@@ -32,7 +41,7 @@ All responses will be returned in a ruby hash format, closely following the stru
 
 #### Ticker `ticker`
     RubyBtce.ticker.btc_usd.last
-    => 555.127  		
+    => 555.127
 
 #### Pair Info `pair_info`
     RubyBtce.pair_info.btc_usd.fee
@@ -44,13 +53,13 @@ All responses will be returned in a ruby hash format, closely following the stru
 
 #### Order Book `order_book(limit)`
     RubyBtce.order_book(2).btc_usd.first.price
-    => 553 
+    => 553
 
 ### Private Methods
 
 #### Account Info `account`
     RubyBtce.account.funds.btc
-    => 0.02199302 
+    => 0.02199302
 
 #### New Trade `new_trade(opts={})`
 This method will take up the values for `rate` and `amount` in the format of a string, integer, or float. You can pass these parameters with any number of decimal places, which will automatically be cut off (not rounded) to the maximum number of places for the specific currency.
@@ -75,7 +84,7 @@ This method will take up the values for `rate` and `amount` in the format of a s
 #### Active Orders `orders(opts={})`
     @orders = RubyBtce.orders("pair" => "btc_usd")
 
-    @orders.each do |id, order| 
+    @orders.each do |id, order|
       id
       => 242304103
 
@@ -86,7 +95,7 @@ This method will take up the values for `rate` and `amount` in the format of a s
 #### Trade History `trades(opts={})`
     @trades = RubyBtce.trades("pair" => "btc_usd")
 
-    @trades.each do |id, trade| 
+    @trades.each do |id, trade|
       id
       => 35308202
 
@@ -97,7 +106,7 @@ This method will take up the values for `rate` and `amount` in the format of a s
 #### Transaction History `transactions(opts={})`
     @transactions = RubyBtce.transactions("from_id" => "242304103", "end_id" => "242304103", "order" => "ASC")
 
-    @transactions.each do |id, transaction| 
+    @transactions.each do |id, transaction|
       id
       => 56116202
 
